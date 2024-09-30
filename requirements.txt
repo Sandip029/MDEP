@@ -1,0 +1,6 @@
+pandas
+numpy
+cloudpickle
+scikit-learn
+streamlit 
+joblib
