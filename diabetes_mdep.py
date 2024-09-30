@@ -26,19 +26,23 @@ model = load(output)
 
 # Set up the Streamlit app
 st.title("Diabetes Prediction App")
+st.markdown("""
+    This application predicts whether an individual has diabetes based on various health metrics. 
+    Fill in the fields below and click "Predict" to see the result.
+""")
 
 # Input fields for user data
 st.sidebar.header("Input Features")
 
-# Create input fields for each feature
-pregnancies = st.sidebar.number_input("Pregnancies", min_value=0, max_value=20, step=1)
-glucose = st.sidebar.number_input("Glucose Level", min_value=0, max_value=300)
-blood_pressure = st.sidebar.number_input("Blood Pressure", min_value=0, max_value=180)
-skin_thickness = st.sidebar.number_input("Skin Thickness", min_value=0, max_value=100)
-insulin = st.sidebar.number_input("Insulin Level", min_value=0, max_value=900)
-bmi = st.sidebar.number_input("BMI", min_value=0.0, max_value=100.0)
-diabetes_pedigree = st.sidebar.number_input("Diabetes Pedigree Function", min_value=0.0, max_value=5.0, step=0.01)
-age = st.sidebar.number_input("Age", min_value=0, max_value=120, step=1)
+# Create input fields for each feature with default values
+pregnancies = st.sidebar.number_input("Pregnancies", min_value=0, max_value=20, step=1, value=1)
+glucose = st.sidebar.number_input("Glucose Level", min_value=0, max_value=300, value=100)
+blood_pressure = st.sidebar.number_input("Blood Pressure", min_value=0, max_value=180, value=70)
+skin_thickness = st.sidebar.number_input("Skin Thickness", min_value=0, max_value=100, value=20)
+insulin = st.sidebar.number_input("Insulin Level", min_value=0, max_value=900, value=80)
+bmi = st.sidebar.number_input("BMI", min_value=0.0, max_value=100.0, value=25.0)
+diabetes_pedigree = st.sidebar.number_input("Diabetes Pedigree Function", min_value=0.0, max_value=5.0, step=0.01, value=0.5)
+age = st.sidebar.number_input("Age", min_value=0, max_value=120, step=1, value=30)
 
 # Create a button to make predictions
 if st.sidebar.button("Predict"):
@@ -48,8 +52,16 @@ if st.sidebar.button("Predict"):
     # Make prediction
     prediction = model.predict(input_data)
 
-    # Display the result
+    # Display the result with an attractive format
+    st.subheader("Prediction Result")
     if prediction == 1:
-        st.write("The model predicts that the individual **has diabetes**.")
+        st.success("The model predicts that the individual **has diabetes**.")
     else:
-        st.write("The model predicts that the individual **does not have diabetes**.")
+        st.success("The model predicts that the individual **does not have diabetes**.")
+
+# Additional styling for a more attractive interface
+st.sidebar.markdown("""
+    ### Instructions
+    1. Fill in the metrics based on your health data.
+    2. Click **Predict** to see if diabetes is likely.
+""")
