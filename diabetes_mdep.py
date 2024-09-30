@@ -10,9 +10,19 @@ Original file is located at
 import streamlit as st
 import numpy as np
 import joblib
+import requests
+from joblib import load
+
 
 # Load the saved model
-model = joblib.load("/mount/src/mdep/best_diabetes_model.sav")
+url = 'https://drive.google.com/uc?id=1_DcUl848RSTa_denJAdc3GfeH2Hxr6cf'
+output = 'best_pipeline_credit.sav'
+response = requests.get(url)
+with open(output, 'wb') as f:
+    f.write(response.content)
+
+# Load the sav file
+model = load(output)
 
 # Set up the Streamlit app
 st.title("Diabetes Prediction App")
