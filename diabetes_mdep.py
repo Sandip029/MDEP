@@ -12,7 +12,7 @@ import numpy as np
 import joblib
 
 # Load the saved model
-model = joblib.load("best_diabetes_model.sav")
+model = joblib.load("/mount/src/mdep/best_diabetes_model.sav")
 
 # Set up the Streamlit app
 st.title("Diabetes Prediction App")
