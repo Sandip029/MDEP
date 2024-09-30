@@ -1,6 +1,10 @@
+streamlit
+scikit-learn
+lightgbm
 pandas
 numpy
+mlflow
+psutil
+pyyaml
 cloudpickle
-scikit-learn
-streamlit 
-joblib
+gdown
